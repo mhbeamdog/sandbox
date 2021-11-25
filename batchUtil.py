@@ -23,7 +23,7 @@ def get_all_materials():
     return materials
 
 '''
- Replace material on mesh
+    Replace material on select meshes 
 '''
 def replace_materials(original_material, replace_material):
     selectedAssets = get_selected_assets()
