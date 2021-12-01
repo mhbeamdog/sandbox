@@ -23,7 +23,14 @@ def get_all_materials():
     return materials
 
 '''
-    Replace material on select meshes 
+    Return child materials of given material
+'''
+def get_child_materials(parent_material):
+    child_materials = unreal.MaterialEditingLibrary.get_child_instances(parent_material)
+    return child_materials
+
+'''
+    Replace material on selected meshes 
 '''
 def replace_materials(original_material, replace_material):
     selectedAssets = get_selected_assets()
@@ -74,7 +81,7 @@ def swap_material_parent(old_mat_name, new_mat_name):
     new_material = unreal.load_asset(new_mat_name)
     #print("New material: ", new_material.get_name())
 
-    child_materials = unreal.MaterialEditingLibrary.get_child_instances(old_material)
+    child_materials = get_child_materials(old_material)
     for child in child_materials:
         unreal.MaterialEditingLibrary.set_material_instance_parent(child.get_asset(), new_material)
 
